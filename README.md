@@ -6,7 +6,7 @@
 
 
 ## :scroll: Description
-This is a aample app which utilizes jetpack compose. It was create as part of the
+This is a sample app which utilizes jetpack compose. It was create as part of the
 [#AndroidDevChallenge](https://android-developers.googleblog.com/2021/02/android-dev-challenge-lift-off-with.html).
 The app showcases the usage of `LazyColumn` (replacement for `RecyclerView`) and basic Compose elements
 like `Text`, `Image` and `Button`.
