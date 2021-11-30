@@ -15,129 +15,34 @@
  */
 package com.example.androiddevchallenge
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import com.example.androiddevchallenge.model.Pet
-import com.example.androiddevchallenge.ui.theme.MyTheme
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.lifecycle.Lifecycle
+import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.adapter.FragmentStateAdapter
+
+val TAG: String = MainActivity::class.java.simpleName
 
 class MainActivity : AppCompatActivity() {
     companion object {
-        val petlist = listOf<Pet>(
-            Pet("Good dog", R.drawable.dog_1, "Medium"),
-            Pet("Fast dog", R.drawable.dog_2, "Small"),
-            Pet("Goodest dog", R.drawable.dog_3, "Small"),
-            Pet("Lazy dog", R.drawable.dog_4, "Big"),
-            Pet("Fluffy Bdog", R.drawable.dog_5, "Big"),
-            Pet("Jolly dog", R.drawable.dog_6, "Big"),
-            Pet("Small dog", R.drawable.dog_7, "Medium"),
-            Pet("Big dog", R.drawable.dog_8, "Small"),
-            Pet("Strange dog", R.drawable.dog_9, "Medium")
-        )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            MyTheme {
-                MyApp(petlist) {
-                    openDetailView(it)
-                }
-            }
-        }
-    }
 
-    private fun openDetailView(pet: Pet) {
-        val intent = DetailActivity.getIntent(this, pet)
-        startActivity(intent)
-    }
-}
-
-// Start building your app here!./gradlew app:spotlessApply
-@Composable
-fun MyApp(pets: List<Pet>, onPetClicked: (Pet) -> Unit) {
-    Surface(color = MaterialTheme.colors.background) {
-        LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(6.dp),
-            modifier = Modifier.padding(8.dp)
-        ) {
-            items(pets) { pet ->
-                PetListItem(
-                    pet = pet,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable {
-                            onPetClicked(pet)
-                        }
-                )
-            }
-        }
-    }
-}
-
-@Composable
-fun PetListItem(
-    pet: Pet,
-    modifier: Modifier = Modifier
-) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier,
-    ) {
-        Image(
-            painterResource(id = pet.drawable), pet.name,
-            modifier = Modifier
-                .width(120.dp)
-                .height(100.dp),
-            contentScale = ContentScale.Crop
-        )
-        Spacer(modifier = Modifier.width(8.dp))
-        Text(
-            text = pet.name,
-            style = MaterialTheme.typography.body1
+        setContentView(
+            R.layout.layout_main
         )
     }
-}
 
-@Preview("Light Theme", widthDp = 360, heightDp = 640)
-@Composable
-fun LightPreview() {
-    MyTheme {
-        MyApp(
-            MainActivity.petlist,
-            {}
-        )
+    fun openViewPagerExample(view: android.view.View) {
+        startActivity(Intent(this, ViewPagerActivity::class.java))
     }
-}
-
-@Preview("Dark Theme", widthDp = 360, heightDp = 640)
-@Composable
-fun DarkPreview() {
-    MyTheme(darkTheme = true) {
-        MyApp(
-            MainActivity.petlist,
-            {}
-        )
+    fun openViewPager2Example(view: android.view.View) {
+        startActivity(Intent(this, ViewPager2Activity::class.java))
     }
 }
