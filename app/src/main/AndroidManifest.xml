@@ -16,7 +16,9 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:label="@string/pet_list_title">
+            android:label="@string/pet_list_title"
+            android:exported="true"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
